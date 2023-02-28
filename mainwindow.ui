@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>640</width>
+    <height>519</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QGridLayout" name="gridLayout">
+    <item row="7" column="3">
+     <widget class="QLabel" name="label_5">
+      <property name="text">
+       <string>BIO</string>
+      </property>
+     </widget>
+    </item>
+    <item row="6" column="5" colspan="2">
+     <widget class="QComboBox" name="sexBox">
+      <item>
+       <property name="text">
+        <string>Male</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Female</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Not Listed</string>
+       </property>
+      </item>
+     </widget>
+    </item>
+    <item row="9" column="4">
+     <widget class="QSpinBox" name="idBox"/>
+    </item>
+    <item row="8" column="3" colspan="4">
+     <widget class="QTextEdit" name="bioEdit"/>
+    </item>
+    <item row="3" column="3">
+     <widget class="QLabel" name="label_2">
+      <property name="text">
+       <string>Name</string>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="3" colspan="4">
+     <widget class="QLabel" name="label_6">
+      <property name="font">
+       <font>
+        <pointsize>22</pointsize>
+        <italic>true</italic>
+       </font>
+      </property>
+      <property name="text">
+       <string>Sueta...</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="0" rowspan="9" colspan="3">
+     <widget class="QTableView" name="tableView"/>
+    </item>
+    <item row="9" column="3">
+     <widget class="QPushButton" name="delRecButton">
+      <property name="text">
+       <string>Delete record</string>
+      </property>
+     </widget>
+    </item>
+    <item row="9" column="0">
+     <widget class="QRadioButton" name="radioMax">
+      <property name="text">
+       <string>Max birthdate</string>
+      </property>
+     </widget>
+    </item>
+    <item row="5" column="5" colspan="2">
+     <widget class="QLabel" name="label_4">
+      <property name="text">
+       <string>Sex</string>
+      </property>
+     </widget>
+    </item>
+    <item row="6" column="3" colspan="2">
+     <widget class="QDateEdit" name="dateEdit"/>
+    </item>
+    <item row="4" column="3" colspan="4">
+     <widget class="QLineEdit" name="nameEdit"/>
+    </item>
+    <item row="2" column="3" colspan="4">
+     <widget class="QLineEdit" name="loginEdit"/>
+    </item>
+    <item row="1" column="3">
+     <widget class="QLabel" name="label">
+      <property name="text">
+       <string>Login</string>
+      </property>
+     </widget>
+    </item>
+    <item row="9" column="1">
+     <widget class="QRadioButton" name="radioEarlier">
+      <property name="text">
+       <string>Birthdate earlier than</string>
+      </property>
+     </widget>
+    </item>
+    <item row="9" column="6">
+     <widget class="QPushButton" name="addRecButton">
+      <property name="text">
+       <string>Add record</string>
+      </property>
+     </widget>
+    </item>
+    <item row="5" column="3">
+     <widget class="QLabel" name="label_3">
+      <property name="text">
+       <string>Birthdate</string>
+      </property>
+     </widget>
+    </item>
+    <item row="13" column="0">
+     <widget class="QRadioButton" name="radioAll">
+      <property name="text">
+       <string>All</string>
+      </property>
+      <property name="checked">
+       <bool>true</bool>
+      </property>
+     </widget>
+    </item>
+    <item row="11" column="0">
+     <widget class="QRadioButton" name="radioMin">
+      <property name="text">
+       <string>Min birthdate</string>
+      </property>
+     </widget>
+    </item>
+    <item row="11" column="1">
+     <widget class="QRadioButton" name="radioLater">
+      <property name="text">
+       <string>Birthdate later than</string>
+      </property>
+     </widget>
+    </item>
+    <item row="13" column="1">
+     <widget class="QDateEdit" name="filtDateEdit"/>
+    </item>
+    <item row="13" column="2">
+     <widget class="QPushButton" name="refreshButton">
+      <property name="text">
+       <string/>
+      </property>
+      <property name="icon">
+       <iconset theme="view-refresh">
+        <normaloff>.</normaloff>.</iconset>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>640</width>
+     <height>22</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
