@@ -2,8 +2,8 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include <QSqlDatabase>
-#include <QSqlQueryModel>
+#include "connector.hpp"
+#include "people_model.hpp"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -17,12 +17,6 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
-    void logOutput();
-    bool connect(QString, QString, QString, QString);
-    void updateModel();
-    void addUser(QString, QString, QString, QDate, QString);
-    void deleteUser(QString);
-
 private slots:
     void on_addRecButton_clicked();
 
@@ -31,8 +25,9 @@ private slots:
     void on_delRecButton_clicked();
 
 private:
-    Ui::MainWindow *ui;
-    QSqlDatabase * db;
-    QSqlQueryModel * model;
+    Ui::MainWindow * ui_;
+    Connector * connector_;
+    PeopleModel * peopleModel_;
+
 };
 #endif // MAINWINDOW_H

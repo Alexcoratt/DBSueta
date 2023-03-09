@@ -1,138 +1,73 @@
+#include <iostream>
+#include <string>
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include <QSqlDatabase>
-#include <iostream>
-#include <QMessageBox>
-#include <QDebug>
-#include <QSqlError>
-#include <QSqlQuery>
-#include <QSqlQueryModel>
-#include <QString>
+#include "connector.hpp"
+#include "add_person_command.hpp"
+#include "update_people_model_command.hpp"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
-    , ui(new Ui::MainWindow)
+    , ui_(new Ui::MainWindow)
 {
-    ui->setupUi(this);
+    ui_->setupUi(this);
 
-    db = new QSqlDatabase();
-    *db = QSqlDatabase::addDatabase("QMYSQL");
-    model = new QSqlQueryModel;
+    connector_ = new Connector();
+    peopleModel_ = new PeopleModel();
 
-    ui->tableView->setModel(model);
+    ui_->peopleTableView->setModel(peopleModel_->get());
 
-    bool connected = connect("192.168.0.105", "sueta", "rem_root", "remroot");
-    if (connected){
-        std::cout << "connected" << std::endl;
-        updateModel();
-    }
-    else {
-        std::cout << "error open database because" << std::endl;
-        logOutput();
-    }
+    bool connected = connector_->connect("192.168.0.111", "sueta", "rem_root", "remroot");
+    std::cout << (connected ? "connected" : "not connected") << std::endl;
 
-    db->close();
+    on_refreshButton_clicked();
 }
 
 MainWindow::~MainWindow()
 {
-    delete ui;
-    delete db;
-    delete model;
+    delete ui_;
+    delete connector_;
+    delete peopleModel_;
 }
 
-void MainWindow::logOutput() {
-    std::cout << db->lastError().text().toStdString() << std::endl;
-}
-
-bool MainWindow::connect(QString hostname, QString dbName, QString userName, QString pwd) {
-    db->setHostName(hostname);
-    db->setDatabaseName(dbName);
-    db->setUserName(userName);
-    db->setPassword(pwd);
-
-    return db->open();
-}
-
-void MainWindow::updateModel()
-{
-    QString mode(' ');
-    if (ui->radioAll->isChecked())
-        mode = ' ';
-    else if (ui->radioEarlier->isChecked())
-        mode = '<';
-    else if (ui->radioLater->isChecked())
-        mode = '>';
-    else if (ui->radioMax->isChecked())
-        mode = "max";
-    else if (ui->radioMin->isChecked())
-        mode = "min";
-
-    QString temp("CALL get_people('%1', '%2');");
-    QString qry = temp.arg(ui->filtDateEdit->date().toString("yyyy-MM-dd"), mode);
-    QSqlQuery query;
-
-    db->open();
-    bool executed = query.exec(qry);
-    db->close();
-
-    if (executed)
-        std::cout << "executed" << '\t' << query.executedQuery().toStdString() << std::endl;
-    else {
-        std::cout << "not executed" << std::endl <<
-                     query.lastError().type() << '\t' << query.lastError().text().toStdString() << std::endl <<
-                     db->lastError().type() << std::endl <<
-                     model->lastError().type() << std::endl;
-    }
-
-    model->setQuery(query);
-}
-
-void MainWindow::addUser(QString login, QString name, QString bio, QDate birthdate, QString sex) {
-    QString temp("CALL add_person('%1', '%2', '%3', '%4', '%5');");
-    QString qry = temp.arg(login, name, bio, birthdate.toString("yyyy-MM-dd"), sex);
-
-    std::cout << qry.toStdString() << std::endl;
-
-    QSqlQuery query(*db);
-
-    db->open();
-    query.exec(qry);
-    db->close();
-}
-
-void MainWindow::deleteUser(QString id) {
-    QString temp("CALL delete_person('%1')");
-    QString qry = temp.arg(id);
-    QSqlQuery query(*db);
-
-    db->open();
-    query.exec(qry);
-    db->close();
-}
 
 void MainWindow::on_addRecButton_clicked()
 {
-    QString login = ui->loginEdit->text();
-    QString name = ui->nameEdit->text();
-    QString bio = ui->bioEdit->toPlainText();
-    QDate birthdate = ui->dateEdit->date();
-    QString sex = ui->sexBox->currentText();
-    addUser(login, name, bio, birthdate, sex);
-    updateModel();
-    logOutput();
+    QString login = ui_->loginEdit->text();
+    QString name = ui_->nameEdit->text();
+    QString bio = ui_->bioEdit->toPlainText();
+    QDate birthdate = ui_->dateEdit->date();
+    QString sex = ui_->sexBox->currentText();
+
+    AddPersonCommand addUsr(login, name, bio, birthdate, sex);
+    std::string err = addUsr.execute(peopleModel_, connector_).text().toStdString();
+    std::cout << err << std::endl;
+    on_refreshButton_clicked();
 }
 
 
 void MainWindow::on_refreshButton_clicked()
 {
-    updateModel();
+    QString mode(' ');
+    if (ui_->radioAll->isChecked())
+        mode = ' ';
+    else if (ui_->radioEarlier->isChecked())
+        mode = '<';
+    else if (ui_->radioLater->isChecked())
+        mode = '>';
+    else if (ui_->radioMax->isChecked())
+        mode = "max";
+    else if (ui_->radioMin->isChecked())
+        mode = "min";
+
+    UpdatePeopleModelCommand upd(ui_->filtDateEdit->date(), mode);
+    std::string err = upd.execute(peopleModel_, connector_).text().toStdString();
+    std::cout << err << std::endl;
 }
 
 
 void MainWindow::on_delRecButton_clicked()
 {
-    deleteUser(ui->idBox->text());
-    updateModel();
+
 }
 
