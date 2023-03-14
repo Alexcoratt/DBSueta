@@ -3,7 +3,7 @@
 
 #include <QMainWindow>
 #include "connector.hpp"
-#include "people_model.hpp"
+#include "model.hpp"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -24,10 +24,16 @@ private slots:
 
     void on_delRecButton_clicked();
 
+    void on_orderPeopleComboBox_currentIndexChanged(int index);
+
+    void on_ordersTableView_activated(const QModelIndex &index);
+
 private:
     Ui::MainWindow * ui_;
     Connector * connector_;
-    PeopleModel * peopleModel_;
+    Model * peopleModel_;
+    Model * orderModel_;
+    Model * orderedItemsModel_;
 
 };
 #endif // MAINWINDOW_H

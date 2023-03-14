@@ -15,12 +15,12 @@
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QGridLayout" name="gridLayout">
-    <item row="0" column="0" rowspan="9" colspan="2">
+    <item row="0" column="0">
      <widget class="QTabWidget" name="tabWidget">
       <property name="currentIndex">
-       <number>0</number>
+       <number>1</number>
       </property>
-      <widget class="QWidget" name="tab">
+      <widget class="QWidget" name="addingPeopleTab">
        <attribute name="title">
         <string>Adding People</string>
        </attribute>
@@ -181,41 +181,113 @@
         </item>
        </layout>
       </widget>
-      <widget class="QWidget" name="tab_2">
+      <widget class="QWidget" name="orderTab">
        <attribute name="title">
-        <string>Tab 2</string>
+        <string>Orders</string>
        </attribute>
-       <widget class="QTableView" name="tableView_2">
+       <widget class="QLabel" name="label_9">
+        <property name="geometry">
+         <rect>
+          <x>410</x>
+          <y>10</y>
+          <width>261</width>
+          <height>26</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>14</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>Order contents</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+        </property>
+       </widget>
+       <widget class="QComboBox" name="orderPeopleComboBox">
         <property name="geometry">
          <rect>
           <x>10</x>
-          <y>10</y>
-          <width>511</width>
-          <height>311</height>
+          <y>490</y>
+          <width>351</width>
+          <height>25</height>
          </rect>
         </property>
        </widget>
-       <widget class="QComboBox" name="comboBox">
+       <widget class="QTableView" name="orderContentsView">
         <property name="geometry">
          <rect>
-          <x>540</x>
-          <y>40</y>
-          <width>161</width>
-          <height>25</height>
+          <x>413</x>
+          <y>41</y>
+          <width>721</width>
+          <height>471</height>
          </rect>
         </property>
        </widget>
        <widget class="QLabel" name="label_7">
         <property name="geometry">
          <rect>
-          <x>540</x>
-          <y>20</y>
-          <width>55</width>
+          <x>9</x>
+          <y>470</y>
+          <width>40</width>
           <height>17</height>
          </rect>
         </property>
         <property name="text">
          <string>Person</string>
+        </property>
+       </widget>
+       <widget class="QTableView" name="ordersTableView">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>40</y>
+          <width>391</width>
+          <height>421</height>
+         </rect>
+        </property>
+        <property name="selectionBehavior">
+         <enum>QAbstractItemView::SelectRows</enum>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_8">
+        <property name="geometry">
+         <rect>
+          <x>9</x>
+          <y>9</y>
+          <width>111</width>
+          <height>26</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>14</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>Order list</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="orderRefreshButton">
+        <property name="geometry">
+         <rect>
+          <x>370</x>
+          <y>490</y>
+          <width>28</width>
+          <height>24</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="icon">
+         <iconset theme="view-refresh">
+          <normaloff>.</normaloff>.</iconset>
         </property>
        </widget>
       </widget>

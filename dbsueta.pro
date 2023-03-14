@@ -12,20 +12,24 @@ SOURCES += \
     add_person_command.cpp \
     connector.cpp \
     delete_person_command.cpp \
+    get_order_items_command.cpp \
+    get_person_orders_command.cpp \
     main.cpp \
     mainwindow.cpp \
-    people_model.cpp \
+    model.cpp \
     update_people_model_command.cpp
 
 HEADERS += \
     add_person_command.hpp \
     connector.hpp \
     delete_person_command.hpp \
+    get_order_items_command.hpp \
+    get_person_orders_command.hpp \
     i_command.hpp \
     i_model.hpp \
     i_receiver.hpp \
     mainwindow.h \
-    people_model.hpp \
+    model.hpp \
     update_people_model_command.hpp
 
 FORMS += \

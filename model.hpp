@@ -1,15 +1,15 @@
-#ifndef PEOPLE_MODEL_HPP
-#define PEOPLE_MODEL_HPP
+#ifndef MODEL_H
+#define MODEL_H
 
 #include "i_model.hpp"
 #include "i_receiver.hpp"
 
-class PeopleModel : public IModel, public IReceiver{
+class Model : public IModel, public IReceiver{
 public:
-    PeopleModel();
+    Model();
 
     // IModel implemented methods
-    ~PeopleModel();
+    ~Model();
     QSqlQueryModel * get();
 
     // IReceiver implemented methods
@@ -19,4 +19,4 @@ private:
         QSqlQueryModel * model_;
 };
 
-#endif // PEOPLE_MODEL_HPP
+#endif // MODEL_H

@@ -8,7 +8,7 @@ public:
     DeletePersonCommand(unsigned id);
     ~DeletePersonCommand();
 
-
+    QSqlError const execute(IReceiver *, Connector const *);
 
 private:
     unsigned id_;
